@@ -1,6 +1,5 @@
 ﻿using ComputerShopSystem.Models;
 using ComputerShopSystem.ViewModel;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -22,6 +21,7 @@ namespace ComputerShopSystem.Controllers
         }
 
         // GET: Device
+        [HttpGet]
         public ActionResult Index()
         {
             var device = _context.Devices
@@ -30,6 +30,7 @@ namespace ComputerShopSystem.Controllers
             return View(device);
         }
 
+        [HttpGet]
         public ActionResult DeviceForm()
         {
             var categories = _context.Categories.ToList();
@@ -41,13 +42,14 @@ namespace ComputerShopSystem.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
         public ActionResult Edit(int Id)
         {
             var device = _context.Devices
                 .SingleOrDefault(c => c.Id == Id);
             var category = _context.Categories
                 .SingleOrDefault(c => c.Id == device.CategoryId);
-            
+
             var viewModel = new EditViewModel
             {
                 Device = device,
@@ -79,18 +81,19 @@ namespace ComputerShopSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveProperty(DevicePropertiesViewModel devicePropertiesViewModel)
+        public ActionResult SaveProperties(DevicePropertiesViewModel devicePropertiesViewModel)
         {
-            foreach (var value in devicePropertiesViewModel.DeviceProperties)
+            foreach (var deviceProperty in devicePropertiesViewModel.DeviceProperties)
             {
-                var property = _context.DeviceProperty
-                    .SingleOrDefault(c => c.Id == value.Id);
+                var propertyInDb = _context.DeviceProperty
+                    .SingleOrDefault(c => c.Id == deviceProperty.Id);
 
-                property.Value = value.Value;
+                propertyInDb.Value = deviceProperty.Value;
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Device");
         }
+
         private void Save(Device device)
         {
             _context.Devices.Add(device);
@@ -112,7 +115,7 @@ namespace ComputerShopSystem.Controllers
             }
             _context.SaveChanges();
         }
-       
+
 
     }
 }
