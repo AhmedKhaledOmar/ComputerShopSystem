@@ -17,15 +17,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @foreach (var device in Model)
-            {
-                <td>@Html.ActionLink(device.Category.Name, "Detials", new { device.Id })</td>
-
-            }
-        </tr>
-
-
+        @foreach (var device in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(device.Category.Name, "Edit", new { device.Id })</td>
+            </tr>
+        }
     </tbody>
 </table>
 

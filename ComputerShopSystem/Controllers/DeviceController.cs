@@ -1,5 +1,6 @@
 ﻿using ComputerShopSystem.Models;
 using ComputerShopSystem.ViewModel;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -9,7 +10,6 @@ namespace ComputerShopSystem.Controllers
     public class DeviceController : Controller
     {
         private ApplicationDbContext _context;
-
         public DeviceController()
         {
             _context = new ApplicationDbContext();
@@ -24,25 +24,75 @@ namespace ComputerShopSystem.Controllers
         // GET: Device
         public ActionResult Index()
         {
-            var device = _context.Devices.Include(c => c.Category).ToList();
+            var device = _context.Devices
+                .Include(c => c.Category)
+                .ToList();
             return View(device);
         }
 
         public ActionResult DeviceForm()
         {
-            var category = _context.Categories.ToList();
+            var categories = _context.Categories.ToList();
             var viewModel = new DeviceViewModel
             {
                 Device = new Device(),
+                Categories = categories
+            };
+            return View(viewModel);
+        }
+
+        public ActionResult Edit(int Id)
+        {
+            var device = _context.Devices
+                .SingleOrDefault(c => c.Id == Id);
+            var category = _context.Categories
+                .SingleOrDefault(c => c.Id == device.CategoryId);
+            
+            var viewModel = new EditViewModel
+            {
+                Device = device,
                 Category = category
             };
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Next(Device device)
+        public ActionResult ProcessDevice(Device device)
         {
-            
+            if (device.Id == 0)
+            {
+                Save(device);
+            }
+            else
+                _context.SaveChanges();
+
+            var deviceProperties = _context.DeviceProperty
+                .Where(c => c.Device.Id == device.Id)
+                .Include(c => c.Property)
+                .ToList();
+
+            var devicePropertiesviewModel = new DevicePropertiesViewModel
+            {
+                DeviceProperties = deviceProperties
+            };
+            return View("Properties", devicePropertiesviewModel);
+        }
+
+        [HttpPost]
+        public ActionResult SaveProperty(DevicePropertiesViewModel devicePropertiesViewModel)
+        {
+            foreach (var value in devicePropertiesViewModel.DeviceProperties)
+            {
+                var property = _context.DeviceProperty
+                    .SingleOrDefault(c => c.Id == value.Id);
+
+                property.Value = value.Value;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Device");
+        }
+        private void Save(Device device)
+        {
             _context.Devices.Add(device);
             _context.SaveChanges();
 
@@ -53,45 +103,16 @@ namespace ComputerShopSystem.Controllers
 
             foreach (var deviceProperty in Properties)
             {
-                var propertyValues = new PropertyValues()
+                var propertyValues = new DeviceProperty()
                 {
                     DeviceID = device.Id,
                     PropertyID = deviceProperty.PropertyID
                 };
-                _context.PropertyValues.Add(propertyValues);
+                _context.DeviceProperty.Add(propertyValues);
             }
             _context.SaveChanges();
-            var values = new DeviceViewModel
-            {
-                PropertyValues = _context.PropertyValues.
-                Where(c => c.Device.Id == device.Id)
-                .Include(c => c.Device)
-                .ToList()
-            };
-
-            return View("Properties", values);
         }
-
-        [HttpPost]
-        public ActionResult SaveProperty(DeviceViewModel deviceViewModel)
-        {
-            foreach (var value in deviceViewModel.PropertyValues)
-            {
-                var property = _context.PropertyValues
-                    .SingleOrDefault(c => c.Id == value.Id);
-
-                property.Values = value.Values;
-            }
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Device");
-        }
-        
-        public ActionResult Edit(int Id)
-        {
-            var device = _context.Devices.SingleOrDefault(c => c.Id == Id);
-            
-            return View(device);
-        }
+       
 
     }
 }

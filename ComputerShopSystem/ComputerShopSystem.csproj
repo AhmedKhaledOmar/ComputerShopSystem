@@ -162,6 +162,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\PopulateTables.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -174,37 +175,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202108032012053_InitialMigration.cs" />
-    <Compile Include="Migrations\202108032012053_InitialMigration.Designer.cs">
-      <DependentUpon>202108032012053_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202108041458351_InitialModel.cs" />
+    <Compile Include="Migrations\202108041458351_InitialModel.Designer.cs">
+      <DependentUpon>202108041458351_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202108032022054_UpdateDeviceModel.cs" />
-    <Compile Include="Migrations\202108032022054_UpdateDeviceModel.Designer.cs">
-      <DependentUpon>202108032022054_UpdateDeviceModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108032045481_EditInModel.cs" />
-    <Compile Include="Migrations\202108032045481_EditInModel.Designer.cs">
-      <DependentUpon>202108032045481_EditInModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108032056125_EditInPropertyValuesModel.cs" />
-    <Compile Include="Migrations\202108032056125_EditInPropertyValuesModel.Designer.cs">
-      <DependentUpon>202108032056125_EditInPropertyValuesModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108032213088_EditInDeviceModel.cs" />
-    <Compile Include="Migrations\202108032213088_EditInDeviceModel.Designer.cs">
-      <DependentUpon>202108032213088_EditInDeviceModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108032311027_AddValueInPropertyModel.cs" />
-    <Compile Include="Migrations\202108032311027_AddValueInPropertyModel.Designer.cs">
-      <DependentUpon>202108032311027_AddValueInPropertyModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108032316255_Edit.cs" />
-    <Compile Include="Migrations\202108032316255_Edit.Designer.cs">
-      <DependentUpon>202108032316255_Edit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108032351069_AddModel.cs" />
-    <Compile Include="Migrations\202108032351069_AddModel.Designer.cs">
-      <DependentUpon>202108032351069_AddModel.cs</DependentUpon>
+    <Compile Include="Migrations\202108041618001_RenameDevicePropertyAttrbuite.cs" />
+    <Compile Include="Migrations\202108041618001_RenameDevicePropertyAttrbuite.Designer.cs">
+      <DependentUpon>202108041618001_RenameDevicePropertyAttrbuite.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -214,10 +191,12 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Property.cs" />
-    <Compile Include="Models\PropertyValues.cs" />
+    <Compile Include="Models\DeviceProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\DevicePropertiesViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModel.cs" />
+    <Compile Include="ViewModel\EditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -252,8 +231,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -278,7 +255,7 @@
     <Content Include="Views\Device\Index.cshtml" />
     <Content Include="Views\Device\DeviceForm.cshtml" />
     <Content Include="Views\Device\Properties.cshtml" />
-    <Content Include="Views\Device\EditorTemplates\PropertyValues.cshtml" />
+    <Content Include="Views\Device\EditorTemplates\DeviceProperty.cshtml" />
     <Content Include="Views\Device\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -298,29 +275,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202108032012053_InitialMigration.resx">
-      <DependentUpon>202108032012053_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202108041458351_InitialModel.resx">
+      <DependentUpon>202108041458351_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108032022054_UpdateDeviceModel.resx">
-      <DependentUpon>202108032022054_UpdateDeviceModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108032045481_EditInModel.resx">
-      <DependentUpon>202108032045481_EditInModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108032056125_EditInPropertyValuesModel.resx">
-      <DependentUpon>202108032056125_EditInPropertyValuesModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108032213088_EditInDeviceModel.resx">
-      <DependentUpon>202108032213088_EditInDeviceModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108032311027_AddValueInPropertyModel.resx">
-      <DependentUpon>202108032311027_AddValueInPropertyModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108032316255_Edit.resx">
-      <DependentUpon>202108032316255_Edit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108032351069_AddModel.resx">
-      <DependentUpon>202108032351069_AddModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202108041618001_RenameDevicePropertyAttrbuite.resx">
+      <DependentUpon>202108041618001_RenameDevicePropertyAttrbuite.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

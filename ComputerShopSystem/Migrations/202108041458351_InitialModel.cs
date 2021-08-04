@@ -3,7 +3,7 @@ namespace ComputerShopSystem.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class InitialModel : DbMigration
     {
         public override void Up()
         {
@@ -17,17 +17,18 @@ namespace ComputerShopSystem.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Devices",
+                "dbo.CategoryProperties",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        AcquisitionDate = c.DateTime(),
-                        Category_Id = c.Int(),
+                        PropertyID = c.Int(nullable: false),
+                        CategoryID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.Category_Id)
-                .Index(t => t.Category_Id);
+                .ForeignKey("dbo.Categories", t => t.CategoryID, cascadeDelete: true)
+                .ForeignKey("dbo.Properties", t => t.PropertyID, cascadeDelete: true)
+                .Index(t => t.PropertyID)
+                .Index(t => t.CategoryID);
             
             CreateTable(
                 "dbo.Properties",
@@ -39,18 +40,33 @@ namespace ComputerShopSystem.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.PropertyValues",
+                "dbo.DeviceProperties",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Device_Id = c.Int(),
-                        Property_Id = c.Int(),
+                        PropertyID = c.Int(nullable: false),
+                        DeviceID = c.Int(nullable: false),
+                        Values = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Devices", t => t.Device_Id)
-                .ForeignKey("dbo.Properties", t => t.Property_Id)
-                .Index(t => t.Device_Id)
-                .Index(t => t.Property_Id);
+                .ForeignKey("dbo.Devices", t => t.DeviceID, cascadeDelete: true)
+                .ForeignKey("dbo.Properties", t => t.PropertyID, cascadeDelete: true)
+                .Index(t => t.PropertyID)
+                .Index(t => t.DeviceID);
+            
+            CreateTable(
+                "dbo.Devices",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        SerialNo = c.Int(nullable: false),
+                        AcquisitionDate = c.DateTime(nullable: false),
+                        CategoryId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .Index(t => t.CategoryId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -128,26 +144,31 @@ namespace ComputerShopSystem.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.PropertyValues", "Property_Id", "dbo.Properties");
-            DropForeignKey("dbo.PropertyValues", "Device_Id", "dbo.Devices");
-            DropForeignKey("dbo.Devices", "Category_Id", "dbo.Categories");
+            DropForeignKey("dbo.DeviceProperties", "PropertyID", "dbo.Properties");
+            DropForeignKey("dbo.DeviceProperties", "DeviceID", "dbo.Devices");
+            DropForeignKey("dbo.Devices", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.CategoryProperties", "PropertyID", "dbo.Properties");
+            DropForeignKey("dbo.CategoryProperties", "CategoryID", "dbo.Categories");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.PropertyValues", new[] { "Property_Id" });
-            DropIndex("dbo.PropertyValues", new[] { "Device_Id" });
-            DropIndex("dbo.Devices", new[] { "Category_Id" });
+            DropIndex("dbo.Devices", new[] { "CategoryId" });
+            DropIndex("dbo.DeviceProperties", new[] { "DeviceID" });
+            DropIndex("dbo.DeviceProperties", new[] { "PropertyID" });
+            DropIndex("dbo.CategoryProperties", new[] { "CategoryID" });
+            DropIndex("dbo.CategoryProperties", new[] { "PropertyID" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.PropertyValues");
-            DropTable("dbo.Properties");
             DropTable("dbo.Devices");
+            DropTable("dbo.DeviceProperties");
+            DropTable("dbo.Properties");
+            DropTable("dbo.CategoryProperties");
             DropTable("dbo.Categories");
         }
     }
