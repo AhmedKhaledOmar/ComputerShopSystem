@@ -21,13 +21,9 @@ namespace ComputerShopSystem.Controllers
         }
 
         // GET: Device
-        [HttpGet]
         public ActionResult Index()
-        {
-            var device = _context.Devices
-                .Include(c => c.Category)
-                .ToList();
-            return View(device);
+        {      
+            return View();
         }
 
         [HttpGet]
