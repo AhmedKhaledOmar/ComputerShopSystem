@@ -1,0 +1,31 @@
+﻿@model ComputerShopSystem.ViewModel.DeviceViewModel
+@{
+    ViewBag.Title = "Detials";
+}
+
+<h2>@Model.Device.Name</h2>
+<h2>@Model.Device.</h2>
+<h2>@Model.Device.Name</h2>
+@using (Html.BeginForm("Next", "Device"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Device.Name)
+        @Html.TextBoxFor(m => m.Device.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Device.SerialNo)
+        @Html.TextBoxFor(m => m.Device.SerialNo, "", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Device.AcquisitionDate)
+        @Html.TextBoxFor(m => m.Device.AcquisitionDate, "{0: d MMM yyyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Device.CategoryId)
+        @Html.DropDownListFor(m => m.Device.CategoryId, new SelectList(Model.Category, "Id", "Name"), "", new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.Device.Id)
+    @Html.AntiForgeryToken()
+    <button class="btn btn-primary" type="submit">Next</button>
+}
+

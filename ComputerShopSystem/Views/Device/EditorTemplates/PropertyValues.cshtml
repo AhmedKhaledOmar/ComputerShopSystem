@@ -1,0 +1,11 @@
+﻿@model ComputerShopSystem.Models.PropertyValues
+@{
+    ViewBag.Title = "PropertyValues";
+}
+
+<div class="form-group">
+    @Html.DisplayFor(x => x.Property.PropertyDescription)
+    @Html.TextBoxFor(x => x.Values, new { @class = "form-control" } )
+    @Html.HiddenFor(x => x.Id)
+</div>
+

@@ -1,0 +1,31 @@
+﻿@model List<ComputerShopSystem.Models.Device>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Devices</h2>
+<br />
+@Html.ActionLink("New Device", "DeviceForm", null, new { @class = "btn btn-primary" })
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Device
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach (var device in Model)
+            {
+                <td>@Html.ActionLink(device.Category.Name, "Detials", new { device.Id })</td>
+
+            }
+        </tr>
+
+
+    </tbody>
+</table>
+

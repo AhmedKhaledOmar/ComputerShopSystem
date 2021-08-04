@@ -1,0 +1,12 @@
+﻿@model ComputerShopSystem.ViewModel.DeviceViewModel
+@{
+    ViewBag.Title = "Properties";
+}
+
+<h2>Properties</h2>
+@using (Html.BeginForm("SaveProperty", "Device"))
+{
+
+    @Html.EditorFor(x => x.PropertyValues)
+    <button class="btn btn-primary" type="submit">Save</button>
+}
