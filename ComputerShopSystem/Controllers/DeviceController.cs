@@ -20,20 +20,12 @@ namespace ComputerShopSystem.Controllers
 			_context.Dispose();
 		}
 
-        // GET: Device
-        public ActionResult Index()
-        {      
-            return View();
-        }
 		// GET: Device
 		[HttpGet]
 		public ActionResult Index()
-		{
-			var device = _context.Devices
-				.Include(c => c.Category)
-				.ToList();
-			return View(device);
-		}
+        {      
+            return View();
+        }
 
 		[HttpGet]
 		public ActionResult DeviceForm()

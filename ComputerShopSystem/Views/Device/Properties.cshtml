@@ -1,9 +1,9 @@
 ﻿@model ComputerShopSystem.ViewModel.DevicePropertiesViewModel
 @{
-    ViewBag.Title = "Properties";
+    ViewBag.Title = "Device Properties";
 }
 
-<h2>Properties</h2>
+<h2>Device Properties</h2>
 @using (Html.BeginForm("SaveProperties", "Device"))
 {
     @Html.EditorFor(x => x.DeviceProperties)
