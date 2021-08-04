@@ -1,8 +1,9 @@
 ﻿namespace ComputerShopSystem.Models
 {
-    public class Property
-    {
-        public int Id { get; set; }
-        public string PropertyDescription { get; set; }
-    }
+	public class Property
+	{
+		public int Id { get; set; }
+
+		public string PropertyDescription { get; set; }
+	}
 }
