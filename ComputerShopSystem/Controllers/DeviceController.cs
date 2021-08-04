@@ -20,6 +20,11 @@ namespace ComputerShopSystem.Controllers
 			_context.Dispose();
 		}
 
+        // GET: Device
+        public ActionResult Index()
+        {      
+            return View();
+        }
 		// GET: Device
 		[HttpGet]
 		public ActionResult Index()
