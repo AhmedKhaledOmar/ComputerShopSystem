@@ -1,7 +1,8 @@
 namespace ComputerShopSystem.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class PopulateTables : DbMigration
     {
         public override void Up()
@@ -47,7 +48,7 @@ namespace ComputerShopSystem.Migrations
             Sql("INSERT INTO [dbo].[CategoryProperties] ([Id], [PropertyID], [CategoryID]) VALUES (16, 15, 2)");
             Sql("SET IDENTITY_INSERT[dbo].[CategoryProperties] OFF");
         }
-
+        
         public override void Down()
         {
         }

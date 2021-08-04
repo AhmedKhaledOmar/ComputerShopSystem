@@ -7,13 +7,13 @@ namespace ComputerShopSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class RenameDevicePropertyAttrbuite : IMigrationMetadata
+    public sealed partial class InitialModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RenameDevicePropertyAttrbuite));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "202108041618001_RenameDevicePropertyAttrbuite"; }
+            get { return "202108041634284_InitialModel"; }
         }
         
         string IMigrationMetadata.Source

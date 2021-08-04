@@ -162,7 +162,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\PopulateTables.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -175,13 +174,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202108041458351_InitialModel.cs" />
-    <Compile Include="Migrations\202108041458351_InitialModel.Designer.cs">
-      <DependentUpon>202108041458351_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\202108041634284_InitialModel.cs" />
+    <Compile Include="Migrations\202108041634284_InitialModel.Designer.cs">
+      <DependentUpon>202108041634284_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202108041618001_RenameDevicePropertyAttrbuite.cs" />
-    <Compile Include="Migrations\202108041618001_RenameDevicePropertyAttrbuite.Designer.cs">
-      <DependentUpon>202108041618001_RenameDevicePropertyAttrbuite.cs</DependentUpon>
+    <Compile Include="Migrations\202108041638170_PopulateTables.cs" />
+    <Compile Include="Migrations\202108041638170_PopulateTables.Designer.cs">
+      <DependentUpon>202108041638170_PopulateTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -275,11 +274,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202108041458351_InitialModel.resx">
-      <DependentUpon>202108041458351_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202108041634284_InitialModel.resx">
+      <DependentUpon>202108041634284_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108041618001_RenameDevicePropertyAttrbuite.resx">
-      <DependentUpon>202108041618001_RenameDevicePropertyAttrbuite.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202108041638170_PopulateTables.resx">
+      <DependentUpon>202108041638170_PopulateTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

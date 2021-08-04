@@ -46,7 +46,7 @@ namespace ComputerShopSystem.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         PropertyID = c.Int(nullable: false),
                         DeviceID = c.Int(nullable: false),
-                        Values = c.String(),
+                        Value = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Devices", t => t.DeviceID, cascadeDelete: true)

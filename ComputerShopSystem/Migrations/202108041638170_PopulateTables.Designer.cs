@@ -7,13 +7,13 @@ namespace ComputerShopSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialModel : IMigrationMetadata
+    public sealed partial class PopulateTables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateTables));
         
         string IMigrationMetadata.Id
         {
-            get { return "202108041458351_InitialModel"; }
+            get { return "202108041638170_PopulateTables"; }
         }
         
         string IMigrationMetadata.Source
